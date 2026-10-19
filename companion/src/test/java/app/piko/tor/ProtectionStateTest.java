@@ -14,6 +14,7 @@ public class ProtectionStateTest {
                     lockdown, privateDns, failed, ready, network);
             assertEquals(requested && target && tun && alwaysOn && lockdown && !privateDns && !failed && network,
                     state.permitsEngine());
+            if (!requested) assertEquals(ProtectionState.OFF, state);
             if (state == ProtectionState.TOR_READY) assertTrue(ready && state.permitsEngine());
         }
     }

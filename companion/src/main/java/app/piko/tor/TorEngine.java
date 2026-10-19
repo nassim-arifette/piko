@@ -13,6 +13,8 @@ final class TorEngine {
 
     private TorEngine() {}
 
+    static synchronized boolean hasWorker() { return worker != null; }
+
     static synchronized boolean start(Object client, ParcelFileDescriptor tun, String cache,
             String data, OnionMasqJni.Listener listener, Runnable exited) throws IOException {
         if (worker != null) return false;
