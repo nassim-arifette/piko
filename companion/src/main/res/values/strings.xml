@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Piko Tor (experimental)</string>
+    <string name="experimental_warning">Experimental build — not yet validated for leak prevention on Android. Do not use for sensitive activity. Tor does not hide your logged-in X account identity.</string>
+    <string name="choose_target">Choose the patched X app</string>
+    <string name="confirm_target">Confirm app identity</string>
+    <string name="pair">Associate this app</string>
+    <string name="target_identity">Package: %1$s\nSigning certificate SHA-256:\n%2$s\n\nConfirm this is your patched X installation. Re-signing or replacing the app requires confirmation again. This does not authenticate the original X publisher.</string>
+    <string name="target_selected">Associated app: %1$s</string>
+    <string name="target_invalid">No trusted target. Associate the installed patched X app with a different Android UID.</string>
+    <string name="start_vpn">Prepare VPN and start Tor</string>
+    <string name="system_settings">Open Android VPN settings</string>
+    <string name="configuration_warning">First consent to the VPN, then enable Always-on VPN and Block connections without VPN for Piko Tor in Android settings. Tor will not start until both are detected. Do not use X during setup. Only one VPN can run per profile. Other apps in this profile may lose Internet access; consider a dedicated profile for X. A tunnel alone is not a kill switch.</string>
+    <string name="refresh_tor">Retry Tor / refresh circuits</string>
+    <string name="stop_vpn">Stop Piko Tor</string>
+    <string name="stop_warning">Stopping closes this tunnel. Android lockdown is NOT disabled by this action: keep it on to block X. If you disable lockdown, revoke VPN permission or uninstall Piko Tor, X may connect directly and reveal your IP. Android may restart an always-on VPN.</string>
+    <string name="stop_before_pairing">Stop the VPN before changing the associated app. Keep Android lockdown enabled.</string>
+    <string name="start_first">Start the VPN first.</string>
+    <string name="service_error">Android could not start the service. Check VPN consent and system settings. Protection is not verified.</string>
+    <string name="state_off">Service stopped — protection not verified.</string>
+    <string name="state_vpn_missing">VPN unavailable — protection lost or unverified. Only Android lockdown can block traffic without the tunnel.</string>
+    <string name="state_lockdown_missing">Tunnel present; Tor paused. Enable Always-on VPN AND Block connections without VPN.</string>
+    <string name="state_private_dns">Strict Private DNS is unsupported in this milestone. Tor paused; the tunnel is retained.</string>
+    <string name="state_network_missing">No underlying Internet network detected — tunnel retained.</string>
+    <string name="state_connecting">Tunnel and Android lockdown detected — connecting to Tor.</string>
+    <string name="state_tor_unavailable">Tor unavailable — tunnel retained, no direct fallback configured.</string>
+    <string name="state_tor_ready">Tor reports ready; tunnel and Android lockdown detected. End-to-end protection has NOT been validated.</string>
+</resources>

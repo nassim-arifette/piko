@@ -28,6 +28,14 @@ import app.morphe.extension.twitter.Pref;
 public class ScreenBuilder {
     private static final SettingsSection[] SETTINGS_SECTIONS = new SettingsSection[]{
             new SettingsSection(
+                    "piko_title_tor",
+                    null,
+                    Settings.TOR_SECTION,
+                    "ic_vector_settings_stroke",
+                    () -> SettingsStatus.torNetworkEnabled,
+                    ScreenBuilder::buildTorSection
+            ),
+            new SettingsSection(
                     "piko_title_premium",
                     null,
                     Settings.PREMIUM_SECTION,
@@ -138,6 +146,13 @@ public class ScreenBuilder {
 
     private void addPreference(Preference pref){
         preferenceTarget.addPreference(null, pref);
+    }
+
+    public void buildTorSection(boolean buildCategory) {
+        if (!SettingsStatus.torNetworkEnabled) return;
+        LegacyTwitterPreferenceCategory category = buildCategory ? preferenceCategory(str("piko_title_tor")) : null;
+        addPreference(category, helper.buttonPreference(
+                str("piko_tor_open"), TorCompanion.summary(context), Settings.TOR_COMPANION));
     }
     private void addPreference(@Nullable LegacyTwitterPreferenceCategory category,Preference pref){
         preferenceTarget.addPreference(category, pref);
