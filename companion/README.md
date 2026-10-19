@@ -31,6 +31,9 @@ generation is current and Android always-on plus lockdown are detected. A retain
 TUN descriptor is intended to blackhole traffic while the engine is stopped.
 Native execution owns a separate duplicate descriptor. Worker shutdown is
 asynchronous; another worker cannot begin until the previous one exits.
+STOP and revocation explicitly release resources instead of waiting for Android to
+destroy a still-bound service. Target changes remain blocked until the native
+worker exits; a subsequent start reloads the selected identity.
 
 ## Setup on a test device
 
@@ -47,6 +50,9 @@ asynchronous; another worker cannot begin until the previous one exits.
    reported readiness. None is a verified end-to-end protection claim.
 6. “Retry Tor / refresh circuits” retries a failed engine or requests new circuits;
    it does not promise an immediate new exit IP or reset X's account identity.
+7. Automatic recovery after killing the VPN process failed on the tested emulator.
+   Reopen Piko Tor and use **Prepare VPN / start** to recover manually; do not disable
+   Android lockdown to regain connectivity. Check both system settings again.
 
 **Important limits:** one VPN per Android profile. Per-app VPN plus lockdown can
 block the OTHER applications in that profile rather than letting them bypass.
@@ -121,13 +127,53 @@ Executed in the development VM (2026-10-19):
   inspection: distinct package names, companion visibility query, protected service
   only in the companion, no Onionmasq library injected into X.
 
-Not yet demonstrated on Android: installation/actual UID separation, JNI startup,
-real Tor bootstrap, X login/media/DMs/notifications, observed exit IP, DNS/IPv4/IPv6,
-UDP/QUIC, native/WebView/auxiliary processes, lockdown interaction with other apps,
-Tor failure while retaining TUN, service kill/TUN loss, reboot, permission revocation,
-provider change, uninstall, network transitions, background/battery restrictions,
-battery/memory/latency, and non-regression of other patches. The Android foreground
-service exemption for a configured VPN is documented but not runtime-verified here.
+### Android runtime checks (2026-10-19)
+
+Final runtime code revision: `4602d80a`. Companion debug APK SHA-256:
+`4ae13fd75fcbeb6e9c9a1b730680eaabb78866777ebb2dbc54d053bfab7825bf`.
+Android 15/API 35 Google APIs x86_64 emulator, fingerprint
+`google/sdk_gphone64_x86_64/emu64xa:15/AE3A.240806.043/12960925:userdebug/dev-keys`.
+This is **not** a physical-device or Android/OEM compatibility matrix.
+
+The companion ran as UID 10209/x86_64, real patched X as UID 10210/arm64-v8a,
+and an independently signed diagnostic app as UID 10211. These are observed lab
+UIDs, not hard-coded values. X's original x86/x86_64 splits lack `libyoga.so` and
+crash before login on this emulator; installing the unchanged patched APK with
+`adb install -r --abi arm64-v8a` used its existing ARM libraries through Android's
+native bridge. No replacement Yoga library or X binary workaround was added.
+
+| Scenario | Observed result and scope |
+| --- | --- |
+| Real X integration | Package/certificate/UID pairing, VPN consent, Android always-on/lockdown, native bootstrap, actual X username form and Piko settings handoff worked. No account credentials were used. |
+| STOP regression | OFF state, saved `requested=false`, no TUN/duplicate descriptors/native worker, target picker usable. Repeated stop/start and reassociation to the diagnostic UID worked without disabling lockdown. |
+| Diagnostic positive controls | HTTPS Tor-check returned `IsTor=true`; ordinary DNS and IPv4/IPv6 TCP succeeded. Controlled DNS and synthetic UDP443 probes appeared on TUN, not physical interfaces, with zero physical target-UID counter increases in the measured windows. This is diagnostic-app evidence, not every X code path or real QUIC. |
+| Engine paused with TUN retained | Strict Private DNS kept the same TUN/service descriptor while previously working diagnostic controls failed. Restoring Automatic restored the successful controls. This does not simulate every native engine failure. |
+| Process kill / TUN loss | After `kill -9`, diagnostic connections were denied with no direct UID-counter increase. **No automatic process/TUN restart within 120.7 seconds.** Android logged a `DeadObjectException` during VPN interface removal/unbinding; the exact sole cause is not proven. |
+| Manual recovery | Visible Prepare/start restored a new TUN, worker and successful diagnostic controls with always-on and lockdown still enabled. |
+| Consent removal | Android's Forget VPN removed TUN and allowed direct DNS/TCP4/UDP443; Tor-check returned `IsTor=false`, as warned. Direct IPv6 was unavailable on the underlying emulator network. System protection must not be claimed after revocation. |
+| Final real X interval | X was reassociated and both Android settings restored. UID-attributed counters increased by 225 IPv4 / 3 IPv6 TUN packets, with zero physical UID delta. Capture showed bidirectional TUN DNS/IPv4; this is not exhaustive IPv6/X coverage. |
+| Other applications | Diagnostic app received permission/DNS failures again while X alone was selected. Per-app lockdown can block other applications rather than allow them direct access. |
+
+Independent observations used scoped packet counts plus Android UID, interface,
+descriptor and system-policy checks. The diagnostic application's healthy controls
+were established before its negative tests; earlier `su`-UID shell probes timed out
+even when healthy and **are not evidence of fail-closed behavior**. No proxy/exit-IP
+result alone was treated as an absence-of-leaks proof.
+
+**Unresolved:** an earlier physical DNS request/reply was not conclusively attributed.
+New controlled-query captures do not retrospectively explain it. No complete DNS
+leak-prevention claim is made. Automatic post-kill recovery remains an availability
+limitation even though the tested negative window did not show direct target traffic.
+
+Earlier code `24b99366` also showed post-reboot startup and TUN retention through
+airplane mode; those observations are not final-revision early-boot/network-transition
+validation. Not yet demonstrated on the final revision: reboot/early-boot traffic,
+airplane mode/Wi-Fi/mobile transitions, authenticated X/media/DMs/notifications,
+comprehensive WebView/native/auxiliary/isolated-process coverage, real QUIC or exhaustive
+UDP destinations, replacement identity invalidation, provider change/uninstall,
+background/battery restrictions, battery/memory/latency, physical devices and
+non-regression of other patches. Runtime evidence and recording are linked from
+[the draft PR](https://github.com/nassim-arifette/piko/pull/1) and its Devin session.
 
 Before describing a tested scenario as protected, run it with independent packet
 capture (including DNS and IPv6), record the target's real UID and Android lockdown
