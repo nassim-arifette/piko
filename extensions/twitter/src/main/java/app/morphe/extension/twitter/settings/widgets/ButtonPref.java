@@ -33,6 +33,7 @@ import app.morphe.extension.twitter.patches.logintoken.ImportLoginTokenDialogFra
 import app.morphe.extension.twitter.patches.nativeFeatures.readerMode.ReaderModeUtils;
 import app.morphe.extension.twitter.settings.ActivityHook;
 import app.morphe.extension.twitter.settings.Settings;
+import app.morphe.extension.twitter.settings.TorCompanion;
 import app.morphe.extension.twitter.settings.fragments.BackupPrefFragment;
 import app.morphe.extension.twitter.settings.fragments.RestorePrefFragment;
 import app.morphe.extension.twitter.Utils;
@@ -98,7 +99,11 @@ public class ButtonPref extends Preference {
                     Bundle bundle = new Bundle();
                     Fragment fragment = null;
 
-                    if (key.equals(Settings.EXPORT_PREF)) {
+                    if (key.equals(Settings.TOR_COMPANION)) {
+                        TorCompanion.open(context);
+                        preference.setTitle(TorCompanion.actionTitle(context));
+                        preference.setSummary(TorCompanion.summary(context));
+                    } else if (key.equals(Settings.EXPORT_PREF)) {
                         bundle.putBoolean("featureFlag", false);
                         fragment = new BackupPrefFragment();
                     } else if (key.equals(Settings.EXPORT_FLAGS)) {
@@ -165,5 +170,3 @@ public class ButtonPref extends Preference {
     }
 
 }
-
-

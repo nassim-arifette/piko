@@ -1,0 +1,79 @@
+import java.security.MessageDigest
+
+plugins {
+    id("com.android.application")
+}
+
+val supportedAbis = setOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+val torAbis = providers.gradleProperty("torAbis")
+    .map { it.split(',').toSet() }.getOrElse(supportedAbis)
+require(torAbis.isNotEmpty() && supportedAbis.containsAll(torAbis)) { "Unsupported torAbis" }
+
+android {
+    namespace = "app.piko.tor"
+    compileSdk = 36
+    defaultConfig {
+        applicationId = "app.piko.tor"
+        minSdk = 29
+        targetSdk = 35
+        versionCode = 1
+        versionName = "0.1.0-experimental"
+        ndk { abiFilters += torAbis }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    sourceSets["main"].jniLibs.srcDir(layout.buildDirectory.dir("generated/jniLibs").get().asFile)
+    sourceSets["main"].assets.srcDir(layout.buildDirectory.dir("generated/assets").get().asFile)
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
+    }
+    lint { abortOnError = true }
+}
+
+val verifyTorNative = tasks.register("verifyTorNative") {
+    val nativeDir = layout.buildDirectory.dir("generated/jniLibs")
+    inputs.dir(nativeDir).optional()
+    doLast {
+        val dir = nativeDir.get().asFile
+        check(dir.resolve("onionmasq-revision.txt").takeIf { it.isFile }?.readText()?.trim() ==
+            "086d05145f5aa711ac300d04edc19c26360bac29") {
+            "Run scripts/build-tor-native.sh before packaging Piko Tor."
+        }
+        torAbis.forEach { abi ->
+            check(dir.resolve("$abi/libonionmasq_mobile.so").isFile) { "Missing Onionmasq ABI: $abi" }
+        }
+        val patchDigest = MessageDigest.getInstance("SHA-256").digest(file("native/privacy.patch").readBytes())
+            .joinToString("") { "%02x".format(it) }
+        check(dir.resolve("privacy-patch.sha256").readText().trim() == patchDigest) {
+            "Native privacy patch changed; rebuild the native libraries."
+        }
+        val checksums = dir.resolve("SHA256SUMS").readLines().associate { line ->
+            val (hash, path) = line.split("  ", limit = 2)
+            path to hash
+        }
+        torAbis.forEach { abi ->
+            val path = "$abi/libonionmasq_mobile.so"
+            val digest = MessageDigest.getInstance("SHA-256").digest(dir.resolve(path).readBytes())
+            check(digest.joinToString("") { "%02x".format(it) } == checksums[path]) {
+                "Native library changed since ELF verification: $abi"
+            }
+        }
+        check(layout.buildDirectory.file("generated/assets/licenses/rust-dependencies.json").get().asFile.isFile) {
+            "Missing third-party notices. Run scripts/build-tor-native.sh."
+        }
+        check(layout.buildDirectory.file("generated/assets/licenses/unresolved-notices.json").get().asFile.readText().trim() == "[]") {
+            "Unresolved third-party notices. Do not distribute this build."
+        }
+    }
+}
+tasks.configureEach {
+    if (name.startsWith("merge") && name.endsWith("NativeLibs")) dependsOn(verifyTorNative)
+}
+
+dependencies {
+    testImplementation(libs.junit)
+}

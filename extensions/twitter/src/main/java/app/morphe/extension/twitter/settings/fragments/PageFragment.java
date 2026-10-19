@@ -18,17 +18,18 @@ import app.morphe.extension.twitter.settings.SettingsSearchNavigator;
 import app.morphe.extension.twitter.settings.widgets.Helper;
 import app.morphe.extension.twitter.settings.ScreenBuilder;
 import app.morphe.extension.twitter.settings.Settings;
+import app.morphe.extension.twitter.settings.TorCompanion;
 
 @SuppressWarnings("deprecation")
 public class PageFragment extends PreferenceFragment {
     private Context context;
     private Preference searchTargetPreference;
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        ActivityHook.toolbar.setTitle(StringRef.str("piko_title_settings"));
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        TorCompanion.refresh(context, getPreferenceScreen());
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

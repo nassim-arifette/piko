@@ -1,0 +1,705 @@
+{
+  "amplify_num@0.5.4": [
+    {
+      "file": "amplify-num-872842c3d151-LICENSE",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "url": "https://raw.githubusercontent.com/rust-amplify/amplify-num/872842c3d151296b18314dfa5bf86548c2ce4f29/LICENSE"
+    }
+  ],
+  "amplify_syn@2.0.1": [
+    {
+      "file": "amplify-derive-29ca86c56316-LICENSE",
+      "sha256": "a7173d3ff287d45cecb4f31f854259264206b152b00bf4ac6ba0445bb0e864a9",
+      "url": "https://raw.githubusercontent.com/rust-amplify/amplify-derive/29ca86c56316ce683bf3827a9d245334db69ce1f/LICENSE"
+    }
+  ],
+  "arti-client@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "asn1-rs-impl@0.2.0": [
+    {
+      "file": "asn1-rs-a20e5f7319c8-LICENSE-APACHE",
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "url": "https://raw.githubusercontent.com/rusticata/asn1-rs/a20e5f7319c896737ad0f2557037817b91ad854f/LICENSE-APACHE"
+    },
+    {
+      "file": "asn1-rs-a20e5f7319c8-LICENSE-MIT",
+      "sha256": "a5c61b93b6ee1d104af9920cf020ff3c7efe818e31fe562c72261847a728f513",
+      "url": "https://raw.githubusercontent.com/rusticata/asn1-rs/a20e5f7319c896737ad0f2557037817b91ad854f/LICENSE-MIT"
+    }
+  ],
+  "bbqueue@0.5.1": [
+    {
+      "file": "bbqueue-96d73640f282-LICENSE-APACHE",
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "url": "https://raw.githubusercontent.com/jamesmunns/bbqueue/96d73640f282b80d1656bb50eecaec236ff42822/LICENSE-APACHE"
+    },
+    {
+      "file": "bbqueue-96d73640f282-LICENSE-MIT",
+      "sha256": "14aa27d13d68a8441e6a937d63265e88684c4500d8bc1f6d5e5cd14edd3cce2b",
+      "url": "https://raw.githubusercontent.com/jamesmunns/bbqueue/96d73640f282b80d1656bb50eecaec236ff42822/LICENSE-MIT"
+    }
+  ],
+  "caret@0.10.0": [
+    {
+      "file": "arti-46472491e80b-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    },
+    {
+      "file": "arti-46472491e80b-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    }
+  ],
+  "cesu8@1.1.0": [
+    {
+      "file": "SPDX-MIT.txt",
+      "sha256": "6d7c9e9d7d12c8d3753bdb24417b84819ba4d6c2f025c37948113d86dc81eef9",
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.26.0/text/MIT.txt"
+    },
+    {
+      "file": "cesu8-f18962a9de51-README.md",
+      "sha256": "4fcc5d9b5db444ad3c33c79aebe18de4fa6351982646da0b78830fbad67f9e8f",
+      "url": "https://raw.githubusercontent.com/emk/cesu8-rs/f18962a9de5189f21600b7ff2898845157df4447/README.md"
+    }
+  ],
+  "cookie-factory@0.3.3": [
+    {
+      "file": "cookie-factory-d36b805dbd7d-MIT.txt",
+      "sha256": "d09216dc1ea5f273997667935a8d6514d80f00b89fb6954ecc3a43e0a6e360de",
+      "url": "https://raw.githubusercontent.com/rust-bakery/cookie-factory/d36b805dbd7dd65f2df947235c5bcc573afe2c76/LICENSES/MIT.txt"
+    }
+  ],
+  "defmt-parser@1.0.0": [
+    {
+      "file": "defmt-4a8cdb44891e-LICENSE-APACHE",
+      "sha256": "8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+      "url": "https://raw.githubusercontent.com/knurling-rs/defmt/4a8cdb44891ed57b8ff5a023b6bec7137c48708f/LICENSE-APACHE"
+    },
+    {
+      "file": "defmt-4a8cdb44891e-LICENSE-MIT",
+      "sha256": "2710a622a896bba67356913d4d0492cab5465f61b2ecce6d880aeb483834fb50",
+      "url": "https://raw.githubusercontent.com/knurling-rs/defmt/4a8cdb44891ed57b8ff5a023b6bec7137c48708f/LICENSE-MIT"
+    }
+  ],
+  "defmt@0.3.100": [
+    {
+      "file": "defmt-f6decae6e09d-LICENSE-APACHE",
+      "sha256": "8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90",
+      "url": "https://raw.githubusercontent.com/knurling-rs/defmt/f6decae6e09d1216aff052aa0733a6b5e632a100/LICENSE-APACHE"
+    },
+    {
+      "file": "defmt-f6decae6e09d-LICENSE-MIT",
+      "sha256": "2710a622a896bba67356913d4d0492cab5465f61b2ecce6d880aeb483834fb50",
+      "url": "https://raw.githubusercontent.com/knurling-rs/defmt/f6decae6e09d1216aff052aa0733a6b5e632a100/LICENSE-MIT"
+    }
+  ],
+  "derive-deftly-macros@1.11.5": [
+    {
+      "file": "rust-derive-deftly-d8684027d213-LICENCE",
+      "sha256": "8ca14a71ccb997fcb12b610a631f51fe181d17db17b47aaeb6e3dc6cfbddce32",
+      "url": "https://gitlab.torproject.org/api/v4/projects/Diziet%2Frust-derive-deftly/repository/files/LICENCE/raw?ref=d8684027d21379fe1cae10dfa697f1a5a782bba9"
+    }
+  ],
+  "fs-mistrust@0.15.1": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "fslock-guard@0.8.0": [
+    {
+      "file": "arti-46472491e80b-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    },
+    {
+      "file": "arti-46472491e80b-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    }
+  ],
+  "jni-sys-macros@0.4.1": [
+    {
+      "file": "jni-sys-64d77b7a5f11-LICENSE-APACHE",
+      "sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+      "url": "https://raw.githubusercontent.com/jni-rs/jni-sys/64d77b7a5f119d7b55b4e2c169a4668067ff59e6/LICENSE-APACHE"
+    },
+    {
+      "file": "jni-sys-64d77b7a5f11-LICENSE-MIT",
+      "sha256": "1d85bd754b04ceec93e98e890edd1fa3c6a22e81bcb32135806beeccefa51cd1",
+      "url": "https://raw.githubusercontent.com/jni-rs/jni-sys/64d77b7a5f119d7b55b4e2c169a4668067ff59e6/LICENSE-MIT"
+    }
+  ],
+  "oneshot-fused-workaround@0.7.0": [
+    {
+      "file": "arti-46472491e80b-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    },
+    {
+      "file": "arti-46472491e80b-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    }
+  ],
+  "retry-error@0.13.0": [
+    {
+      "file": "arti-46472491e80b-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    },
+    {
+      "file": "arti-46472491e80b-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    }
+  ],
+  "safelog@0.9.1": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "slotmap-careful@0.8.0": [
+    {
+      "file": "arti-46472491e80b-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    },
+    {
+      "file": "arti-46472491e80b-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    }
+  ],
+  "tor-async-utils@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-basic-utils@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-bytes@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-cell@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-cert@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-chanmgr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-checkable@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-circmgr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-config-path@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-config@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-consdiff@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-dirclient@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-dircommon@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-dirmgr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-error@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-general-addr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-geoip-db@0.1.0-pre2": [
+    {
+      "file": "SPDX-MIT.txt",
+      "sha256": "6d7c9e9d7d12c8d3753bdb24417b84819ba4d6c2f025c37948113d86dc81eef9",
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.26.0/text/MIT.txt"
+    },
+    {
+      "file": "CC-BY-SA-4.0.txt",
+      "sha256": "cde7883b9050a1104f4ac19a1572aafd6e5d7323b68351aaf51fbf4beba54966",
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.26.0/text/CC-BY-SA-4.0.txt"
+    },
+    {
+      "file": "tor-geoip-db-0.1.0-pre2-Cargo.toml",
+      "sha256": "9b42c0610cfbc2273b37d5f59dee0a577333a41cd2cafd1dc5093d6c67a88591",
+      "url": "https://crates.io/api/v1/crates/tor-geoip-db/0.1.0-pre2/download#Cargo.toml"
+    },
+    {
+      "file": "tor-geoip-db-0.1.0-pre2-export_info_v4.md",
+      "sha256": "a3375647e056c6db1c10fc4a7806b96f63b333fe08e412e9e139280bb6267a88",
+      "url": "https://crates.io/api/v1/crates/tor-geoip-db/0.1.0-pre2/download#doc/export_info_v4.md"
+    },
+    {
+      "file": "tor-geoip-db-0.1.0-pre2-export_info_v6.md",
+      "sha256": "a3375647e056c6db1c10fc4a7806b96f63b333fe08e412e9e139280bb6267a88",
+      "url": "https://crates.io/api/v1/crates/tor-geoip-db/0.1.0-pre2/download#doc/export_info_v6.md"
+    }
+  ],
+  "tor-geoip@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-guardmgr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-hsclient@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-hscrypto@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-key-forge@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-keymgr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-linkspec@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-llcrypto@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-log-ratelim@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-memquota-cost@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-memquota@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-netdir@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-netdoc@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-persist@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-proto@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-protover@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-ptmgr@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-relay-selection@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-rtcompat@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-rtmock@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-socksproto@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "tor-units@0.45.0": [
+    {
+      "file": "arti-009354f78d1a-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    },
+    {
+      "file": "arti-009354f78d1a-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=009354f78d1a61214a878d6f1712a50844e6c215"
+    }
+  ],
+  "void@1.0.2": [
+    {
+      "file": "void-ab2f4dbb7c95-README.md",
+      "sha256": "f85783a6fcf9ecc19edabd710775a88430d9e886f46728bfd7d65cef55ff3e73",
+      "url": "https://raw.githubusercontent.com/reem/rust-void/ab2f4dbb7c95c144ccba2fa8afd11e155aa91133/README.md"
+    },
+    {
+      "file": "SPDX-MIT.txt",
+      "sha256": "6d7c9e9d7d12c8d3753bdb24417b84819ba4d6c2f025c37948113d86dc81eef9",
+      "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.26.0/text/MIT.txt"
+    }
+  ],
+  "web-time-compat@0.2.0": [
+    {
+      "file": "arti-46472491e80b-LICENSE-APACHE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-APACHE/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    },
+    {
+      "file": "arti-46472491e80b-LICENSE-MIT",
+      "sha256": "e40081d18f17b6783fcb554ae42f6fa3548988e4d705a3e4541e2ef240293040",
+      "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/LICENSE-MIT/raw?ref=46472491e80b1fdfb878efa2a6413deb90885b0e"
+    }
+  ]
+}

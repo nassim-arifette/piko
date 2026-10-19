@@ -1,0 +1,16 @@
+diff --git a/crates/onionmasq-mobile/src/lib.rs b/crates/onionmasq-mobile/src/lib.rs
+index fdbc78d6b410af9469a052d7b999847a677c3919..adadbd654b77b88106e6433dc1b552ecab78df49 100644
+--- a/crates/onionmasq-mobile/src/lib.rs
++++ b/crates/onionmasq-mobile/src/lib.rs
+@@ -43,9 +43,9 @@ static ONIONMASQ_MOBILE_SINGLETON: OnceCell<OnionmasqMobile> = OnceCell::new();
+ // embarrassing privacy issues (note that the Android logcat is potentially readable by any
+ // app with the required permissions!)
+ #[cfg(feature = "verbose")]
+-static LOG_FILTER: &str = "info,onionmasq_mobile=trace,onion_tunnel=trace,arti_client=debug,tor_chanmgr=debug,tor_proto=debug,smoltcp=debug,onionmasq_pt_wrapper=trace";
++static LOG_FILTER: &str = "off";
+ #[cfg(not(feature = "verbose"))]
+-static LOG_FILTER: &str = "info,onionmasq_mobile=debug";
++static LOG_FILTER: &str = "off";
+ 
+ pub(crate) type BandwidthCounterMap = Arc<DashMap<u64, Arc<BandwidthCounter>>>;
+ 
