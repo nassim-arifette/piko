@@ -2,6 +2,9 @@
 <resources>
     <string name="piko_title_tor">Confidentialité — Réseau Tor</string>
     <string name="piko_tor_open">Ouvrir Piko Tor</string>
+    <string name="piko_tor_download">Télécharger Piko Tor</string>
+    <string name="piko_tor_download_warning">Téléchargez l’APK expérimental du compagnon depuis nassim-arifette/piko sur GitHub avec votre navigateur. Android vous demandera de confirmer l’installation. Installer ne protège pas X : configurez le VPN permanent et le blocage des connexions sans VPN. Si le verrouillage bloque le navigateur, transférez l’APK depuis un autre appareil ; ne désactivez pas le verrouillage pour le télécharger. Cette version n’est pas validée pour un usage sensible.</string>
+    <string name="piko_tor_download_failed">Impossible d’ouvrir le téléchargement. Récupérez l’APK compagnon sur github.com/nassim-arifette/piko/releases depuis un autre appareil si nécessaire. Gardez le verrouillage VPN Android activé.</string>
     <string name="piko_tor_installed">Compagnon installé : %s</string>
     <string name="piko_tor_unverified">Protection non vérifiée dans X. Configurez le compagnon séparé et le VPN permanent Android avec blocage hors VPN. Expérimental ; absence de fuites non validée.</string>
     <string name="piko_tor_missing">Compagnon non installé. Installez Piko Tor séparément ; ce patch seul ne redirige ni ne bloque le trafic.</string>
