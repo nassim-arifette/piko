@@ -101,6 +101,7 @@ public class ButtonPref extends Preference {
 
                     if (key.equals(Settings.TOR_COMPANION)) {
                         TorCompanion.open(context);
+                        preference.setTitle(TorCompanion.actionTitle(context));
                         preference.setSummary(TorCompanion.summary(context));
                     } else if (key.equals(Settings.EXPORT_PREF)) {
                         bundle.putBoolean("featureFlag", false);
@@ -169,4 +170,3 @@ public class ButtonPref extends Preference {
     }
 
 }
-

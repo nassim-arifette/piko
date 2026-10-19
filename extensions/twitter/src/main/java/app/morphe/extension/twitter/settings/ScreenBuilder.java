@@ -152,7 +152,7 @@ public class ScreenBuilder {
         if (!SettingsStatus.torNetworkEnabled) return;
         LegacyTwitterPreferenceCategory category = buildCategory ? preferenceCategory(str("piko_title_tor")) : null;
         addPreference(category, helper.buttonPreference(
-                str("piko_tor_open"), TorCompanion.summary(context), Settings.TOR_COMPANION));
+                TorCompanion.actionTitle(context), TorCompanion.summary(context), Settings.TOR_COMPANION));
     }
     private void addPreference(@Nullable LegacyTwitterPreferenceCategory category,Preference pref){
         preferenceTarget.addPreference(category, pref);

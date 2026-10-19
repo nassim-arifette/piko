@@ -37,6 +37,27 @@ worker exits; a subsequent start reloads the selected identity.
 
 ## Setup on a test device
 
+[Add this fork to Morphe](https://morphe.software/add-source?github=nassim-arifette/piko&name=Piko%20Tor%20experimental)
+or import `patches-3.9.0-tor.1.mpp` from the
+[experimental release](https://github.com/nassim-arifette/piko/releases/tag/v3.9.0-tor.1).
+Leave the source's **Use pre-release** toggle off: Morphe switches that toggle to
+`dev`, but this fork publishes its experimental manifest on `main`. Use this
+source instead of upstream Piko for X to avoid duplicate patches. In expert mode,
+enable **Tor network companion** and provide your original X 12.19.1-release.0 APKM.
+
+When the companion is missing, X offers **Download Piko Tor**. An explicit
+confirmation opens the version-matched GitHub APK in an external handler; Android
+still requires installation consent. Installed companions open the existing
+pairing/setup screen. No background download, installer permission, automatic
+installation or weakening of lockdown is added. If lockdown blocks the browser,
+transfer the APK from another device instead of disabling lockdown.
+
+This release uses debug signing for the companion and has no detached publisher
+signature for the bundle. SHA-256 checksums detect mismatched files, not an
+independent publisher identity. The release tag provides the Piko source; pinned
+native source revisions and build instructions are below. No prepatched X APK is
+distributed. The upstream automatic stable-release job does not run in this fork.
+
 1. Use a spare device or dedicated Android profile. Install the patched X APK and
    companion from a source you trust; confirm their signing identities separately.
 2. Do not use X while configuring protection. In Piko settings, open **Privacy —
@@ -104,7 +125,7 @@ To apply only the new optional patch to the supported X bundle (Morphe Desktop
 
 ```sh
 java -jar morphe-desktop-1.18.1-all.jar patch --exclusive \
-  -p patches/build/libs/patches-3.9.0.mpp -e 'Tor network companion' \
+  -p patches/build/libs/patches-3.9.0-tor.1.mpp -e 'Tor network companion' \
   -o x-piko-tor.apk X-12.19.1-release.0.apkm
 ```
 

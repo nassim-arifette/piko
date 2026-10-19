@@ -8,19 +8,36 @@ package app.morphe.extension.twitter.settings;
 import static app.morphe.extension.shared.StringRef.str;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 
 import app.morphe.extension.crimera.PikoUtils;
 
 public final class TorCompanion {
     private static final String PACKAGE = "app.piko.tor";
+    private static final String DOWNLOAD_URL = "https://github.com/nassim-arifette/piko/releases/download/v3.9.0-tor.1/piko-tor-0.1.0-experimental.apk";
 
     private TorCompanion() {}
+
+    public static String actionTitle(Context context) {
+        return str(Build.VERSION.SDK_INT >= 29 && !isInstalled(context)
+                ? "piko_tor_download" : "piko_tor_open");
+    }
+
+    private static boolean isInstalled(Context context) {
+        try {
+            context.getPackageManager().getPackageInfo(PACKAGE, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
 
     public static String summary(Context context) {
         if (Build.VERSION.SDK_INT < 29) return str("piko_tor_unsupported");
@@ -46,10 +63,27 @@ public final class TorCompanion {
             PikoUtils.toast(str("piko_tor_open_failed"));
             return;
         }
+        Activity activity = (Activity) context;
+        if (!isInstalled(activity)) {
+            new AlertDialog.Builder(activity)
+                    .setTitle(str("piko_tor_download"))
+                    .setMessage(str("piko_tor_download_warning"))
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(str("piko_tor_download"), (dialog, which) -> {
+                        try {
+                            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(DOWNLOAD_URL))
+                                    .addCategory(Intent.CATEGORY_BROWSABLE));
+                        } catch (RuntimeException e) {
+                            PikoUtils.toast(str("piko_tor_download_failed"));
+                        }
+                    })
+                    .show();
+            return;
+        }
         Intent intent = new Intent().setComponent(new ComponentName(PACKAGE, PACKAGE + ".MainActivity"));
         try {
             // Android supplies getCallingPackage() to the companion; no trusted state is returned to X.
-            ((Activity) context).startActivityForResult(intent, 0x5049);
+            activity.startActivityForResult(intent, 0x5049);
         } catch (RuntimeException e) {
             PikoUtils.toast(str("piko_tor_open_failed"));
         }
