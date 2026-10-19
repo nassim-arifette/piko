@@ -1,6 +1,6 @@
-## Experimental Piko Tor fork
+## Experimental Piko Tor
 
-**Not validated for sensitive use or complete leak prevention.** This fork adds
+**Still experimental** This fork adds
 an optional Tor companion patch for X, based on Piko 3.9.0. The upstream 3.10.0
 synchronization is not included in this release.
 
