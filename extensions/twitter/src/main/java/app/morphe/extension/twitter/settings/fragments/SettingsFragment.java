@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 import app.morphe.extension.twitter.settings.widgets.Helper;
 import app.morphe.extension.twitter.settings.ScreenBuilder;
+import app.morphe.extension.twitter.settings.TorCompanion;
 import app.morphe.extension.twitter.settings.Settings;
 import app.morphe.extension.twitter.settings.ActivityHook;
 import app.morphe.extension.twitter.settings.SettingsSearchUIController;
@@ -30,6 +31,7 @@ public class SettingsFragment extends PreferenceFragment implements SettingsSear
         if (screenBuilder != null) {
             screenBuilder.invalidateSettingsSearchIndex();
         }
+        TorCompanion.refresh(context, screen);
         if (!SettingsSearchUIController.isActive()) {
             SettingsSearchUIController.restoreToolbarTitle(getActivity());
         }
