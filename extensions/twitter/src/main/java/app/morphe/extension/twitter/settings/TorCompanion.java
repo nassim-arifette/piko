@@ -16,6 +16,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 
 import app.morphe.extension.crimera.PikoUtils;
 
@@ -28,6 +30,15 @@ public final class TorCompanion {
     public static String actionTitle(Context context) {
         return str(Build.VERSION.SDK_INT >= 29 && !isInstalled(context)
                 ? "piko_tor_download" : "piko_tor_open");
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void refresh(Context context, PreferenceScreen screen) {
+        if (screen == null) return;
+        Preference preference = screen.findPreference(Settings.TOR_COMPANION);
+        if (preference == null) return;
+        preference.setTitle(actionTitle(context));
+        preference.setSummary(summary(context));
     }
 
     private static boolean isInstalled(Context context) {
