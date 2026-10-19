@@ -1,0 +1,43 @@
+name: Tor companion build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - 'companion/**'
+      - 'scripts/**'
+      - 'gradle/**'
+      - 'settings.gradle.kts'
+      - '.github/workflows/tor_companion.yml'
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  companion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install pinned Android and Rust tools
+        run: |
+          printf '%s\n' y y y y y y y y y y | scripts/setup-tor-android.sh
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      - name: Build and verify all native ABIs and notices
+        run: scripts/build-tor-native.sh
+      - name: Compile APK, unit tests and lint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew --no-daemon :companion:assembleDebug :companion:testDebugUnitTest :companion:lintDebug
+      - name: Check APK alignment and signature
+        run: |
+          "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 4 companion/build/outputs/apk/debug/companion-debug.apk
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify companion/build/outputs/apk/debug/companion-debug.apk

@@ -9,6 +9,7 @@ on:
 jobs:
   release:
     name: Release
+    if: github.repository == 'crimera/piko'
     permissions:
       contents: write
       packages: write
