@@ -38,8 +38,8 @@ worker exits; a subsequent start reloads the selected identity.
 ## Setup on a test device
 
 [Add this fork to Morphe](https://morphe.software/add-source?github=nassim-arifette/piko&name=Piko%20Tor%20experimental)
-or import `patches-3.9.0-tor.1.mpp` from the
-[experimental release](https://github.com/nassim-arifette/piko/releases/tag/v3.9.0-tor.1).
+or import `patches-3.9.0-tor.2.mpp` from the
+[experimental release](https://github.com/nassim-arifette/piko/releases/tag/v3.9.0-tor.2).
 Leave the source's **Use pre-release** toggle off: Morphe switches that toggle to
 `dev`, but this fork publishes its experimental manifest on `main`. Use this
 source instead of upstream Piko for X to avoid duplicate patches. In expert mode,
@@ -125,7 +125,7 @@ To apply only the new optional patch to the supported X bundle (Morphe Desktop
 
 ```sh
 java -jar morphe-desktop-1.18.1-all.jar patch --exclusive \
-  -p patches/build/libs/patches-3.9.0-tor.1.mpp -e 'Tor network companion' \
+  -p patches/build/libs/patches-3.9.0-tor.2.mpp -e 'Tor network companion' \
   -o x-piko-tor.apk X-12.19.1-release.0.apkm
 ```
 
