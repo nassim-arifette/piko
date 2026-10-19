@@ -28,7 +28,7 @@ public final class TorVpnService extends VpnService {
     static final String REFRESH = "app.piko.tor.REFRESH";
     static final String STOP = "app.piko.tor.STOP";
     private static volatile ProtectionState currentState = ProtectionState.OFF;
-    private static volatile boolean serviceAlive;
+    private static volatile boolean serviceActive;
     private ProtectionState notifiedState;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private ParcelFileDescriptor tun;
@@ -43,11 +43,11 @@ public final class TorVpnService extends VpnService {
     private volatile int engineGeneration;
 
     static ProtectionState state() { return currentState; }
-    static boolean alive() { return serviceAlive; }
+    static boolean active() { return serviceActive || TorEngine.hasWorker(); }
 
     @Override public void onCreate() {
         super.onCreate();
-        serviceAlive = true;
+        serviceActive = true;
         getSystemService(NotificationManager.class).createNotificationChannel(
                 new NotificationChannel("tor", getString(R.string.app_name), NotificationManager.IMPORTANCE_LOW));
     }
@@ -58,6 +58,7 @@ public final class TorVpnService extends VpnService {
         if (STOP.equals(action)) {
             requested = false;
             TargetConfig.preferences(this).edit().putBoolean("requested", false).apply();
+            shutdown(ProtectionState.OFF);
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -66,9 +67,12 @@ public final class TorVpnService extends VpnService {
         }
         requested = TargetConfig.preferences(this).getBoolean("requested", false);
         if (!requested) {
+            shutdown(ProtectionState.OFF);
             stopSelf();
             return START_NOT_STICKY;
         }
+        serviceActive = true;
+        revoked = prepare(this) != null;
         if (target == null) target = TargetConfig.load(this);
         if (REFRESH.equals(action)) {
             failed = false;
@@ -207,24 +211,32 @@ public final class TorVpnService extends VpnService {
 
     @Override public void onRevoke() {
         revoked = true;
-        permitSockets = false;
-        ready = false;
-        currentState = ProtectionState.VPN_MISSING;
+        shutdown(requested ? ProtectionState.VPN_MISSING : ProtectionState.OFF);
         stopSelf();
     }
 
-    @Override public void onDestroy() {
-        destroyed = true;
+    private void shutdown(ProtectionState state) {
         permitSockets = false;
-        serviceAlive = false;
+        ready = false;
+        started = false;
+        failed = false;
+        engineGeneration++;
         handler.removeCallbacks(tick);
         TorEngine.stop(this);
         if (tun != null) {
             try { tun.close(); } catch (IOException ignored) { }
             tun = null;
         }
-        currentState = requested ? ProtectionState.VPN_MISSING : ProtectionState.OFF;
+        target = null;
+        serviceActive = false;
+        currentState = state;
+        notifiedState = null;
         stopForeground(STOP_FOREGROUND_REMOVE);
+    }
+
+    @Override public void onDestroy() {
+        destroyed = true;
+        shutdown(requested ? ProtectionState.VPN_MISSING : ProtectionState.OFF);
         super.onDestroy();
     }
 }

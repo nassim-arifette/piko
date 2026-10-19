@@ -63,7 +63,7 @@ public final class MainActivity extends Activity {
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> prepareVpn()).create()));
         addButton(content, R.string.system_settings, () -> startActivity(new Intent(Settings.ACTION_VPN_SETTINGS)));
         addButton(content, R.string.refresh_tor, () -> {
-            if (TorVpnService.alive()) send(TorVpnService.REFRESH);
+            if (TorVpnService.active()) send(TorVpnService.REFRESH);
             else showError(R.string.start_first);
         });
         addButton(content, R.string.stop_vpn, () -> showDialog(new AlertDialog.Builder(this)
@@ -71,7 +71,7 @@ public final class MainActivity extends Activity {
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     TargetConfig.preferences(this).edit().putBoolean("requested", false).apply();
-                    if (TorVpnService.alive()) send(TorVpnService.STOP);
+                    if (TorVpnService.active()) send(TorVpnService.STOP);
                 }).create()));
         if (state == null) {
             // Only Android's caller identity is used. Intent package-name extras are ignored.
@@ -94,7 +94,7 @@ public final class MainActivity extends Activity {
     }
 
     private void chooseTarget() {
-        if (TorVpnService.alive()) { showError(R.string.stop_before_pairing); return; }
+        if (TorVpnService.active()) { showError(R.string.stop_before_pairing); return; }
         Intent launcher = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> installed = getPackageManager().queryIntentActivities(launcher, 0);
         installed.sort(Comparator.comparing(info -> info.activityInfo.packageName));
@@ -112,14 +112,14 @@ public final class MainActivity extends Activity {
     }
 
     private void confirmTarget(String packageName) {
-        if (TorVpnService.alive()) { showError(R.string.stop_before_pairing); return; }
+        if (TorVpnService.active()) { showError(R.string.stop_before_pairing); return; }
         try {
             TargetConfig candidate = TargetConfig.inspect(this, packageName);
             showDialog(new AlertDialog.Builder(this).setTitle(R.string.confirm_target)
                     .setMessage(getString(R.string.target_identity, candidate.packageName, candidate.certificate))
                     .setNegativeButton(android.R.string.cancel, null)
                     .setPositiveButton(R.string.pair, (dialog, which) -> {
-                        if (TorVpnService.alive() || !candidate.valid(this)) {
+                        if (TorVpnService.active() || !candidate.valid(this)) {
                             showError(R.string.target_invalid);
                             return;
                         }
@@ -176,8 +176,9 @@ public final class MainActivity extends Activity {
         target.setText(selected.valid(this) ? getString(R.string.target_selected, selected.packageName)
                 : getString(R.string.target_invalid));
         ProtectionState state = TorVpnService.state();
-        if (!TorVpnService.alive() && TargetConfig.preferences(this).getBoolean("requested", false)) {
-            state = ProtectionState.VPN_MISSING;
+        if (!TorVpnService.active()) {
+            state = TargetConfig.preferences(this).getBoolean("requested", false)
+                    ? ProtectionState.VPN_MISSING : ProtectionState.OFF;
         }
         status.setText(describe(this, state));
     }
