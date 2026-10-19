@@ -11,6 +11,12 @@ import app.morphe.extension.twitter.patches.FeatureSwitchPatch;
 
 public class SettingsStatus {
 
+    public static boolean torNetworkEnabled = false;
+
+    public static void enableTorNetwork() {
+        torNetworkEnabled = true;
+    }
+
     public static boolean showChangelogsPatchEnabled = false;
 
     public static boolean changeDownloadEnabled = false;

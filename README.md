@@ -1,3 +1,23 @@
+## Experimental Piko Tor fork
+
+**Not validated for sensitive use or complete leak prevention.** This fork adds
+an optional Tor companion patch for X, based on Piko 3.9.0. The upstream 3.10.0
+synchronization is not included in this release.
+
+- [Add this fork to Morphe](https://morphe.software/add-source?github=nassim-arifette/piko&name=Piko%20Tor%20experimental)
+- [Patch bundle and companion APK](https://github.com/nassim-arifette/piko/releases/tag/v3.9.0-tor.1)
+- [Installation, limitations and build instructions](companion/README.md)
+
+Use this source instead of upstream Piko for X; do not apply duplicate patches.
+Leave the source's **Use pre-release** toggle off: this fork's experimental
+manifest is on `main`, not `dev`. Enable **Tor network companion** in expert mode.
+Morphe does not install the companion from the bundle; X offers its download when
+missing. No prepatched X APK is distributed. The automatic stable-release workflow
+is restricted to upstream; this fork publishes explicit experimental releases.
+
+The upstream usage and catalogue below describe inherited Piko functionality,
+not completed Tor security validation.
+
 <div align="center">
 
 <img src="https://socialify.git.ci/crimera/piko/image?forks=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Auto" alt="piko" width="640" height="320" />
