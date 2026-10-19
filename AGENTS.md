@@ -1,190 +1,189 @@
-# Instructions permanentes du projet — Piko Tor / Arti (Android / X)
+# Permanent project instructions — Piko Tor / Arti (Android / X)
 
-> **Portée :** ce document décrit le contexte, la vision, les contraintes et la méthode de travail à conserver dans toutes les sessions d'agents (notamment Devin) intervenant sur ce dépôt.
+> **Scope:** this document describes the context, vision, constraints and working method to keep across all agent sessions (including Devin) working on this repository.
 >
-> **Important :** il s'agit d'un **objectif de développement**, et non d'une fonctionnalité déjà implémentée ou dont la sécurité serait démontrée. Ne jamais présenter une capacité comme opérationnelle ou sans fuite réseau sans validation effective.
+> **Important:** this is a **development goal**, not a feature that is already implemented or whose security has been demonstrated. Never present a capability as working or leak-free without actual validation.
 >
-> **Priorité :** toute tâche en rapport avec Tor, Arti, le réseau ou les patchs X doit rester cohérente avec ce document. Pour les autres tâches du dépôt, ne pas imposer inutilement le périmètre Tor.
+> **Priority:** any task related to Tor, Arti, networking or X patches must stay consistent with this document. For other tasks in the repository, do not needlessly impose the Tor scope.
 
-## 1. Contexte, choix d'architecture et priorité absolue
+## 1. Context, architecture choice and absolute priority
 
-- **Dépôt du fork :** https://github.com/nassim-arifette/piko
-- **Projet existant :** Piko est un ensemble de patchs Morphe pour les applications Android Twitter/X et Instagram. Morphe applique les patchs à l'APK/APKM ; Piko n'est pas lui-même le moteur de patching.
-- **Périmètre initial :** X uniquement, pas Instagram.
-- **Fonctionnalité visée :** un patch Piko optionnel (nom envisagé : `TorNetworkPatch`) donnant accès aux contrôles Tor dans les paramètres de X.
-- **Objectif de confidentialité :** masquer l'IP publique de l'utilisateur vis-à-vis des serveurs de X en faisant passer les connexions concernées par le réseau Tor, via Arti (client Tor écrit en Rust).
-- **Priorité NON NÉGOCIABLE :** lorsqu'un mode de protection est activé, **mieux vaut que X n'ait plus Internet plutôt qu'il se connecte directement sans Tor**. Aucun fallback silencieux vers le réseau direct, y compris lors du démarrage, d'une erreur Tor ou d'une panne du VPN.
+- **Fork repository:** https://github.com/nassim-arifette/piko
+- **Existing project:** Piko is a set of Morphe patches for the Twitter/X and Instagram Android apps. Morphe applies the patches to the APK/APKM; Piko itself is not the patching engine.
+- **Initial scope:** X only, not Instagram.
+- **Target feature:** an optional Piko patch (working name: `TorNetworkPatch`) giving access to Tor controls in X's settings.
+- **Privacy goal:** hide the user's public IP from X's servers by routing the relevant connections through the Tor network, via Arti (a Tor client written in Rust).
+- **NON-NEGOTIABLE priority:** when a protection mode is enabled, **it is better for X to have no Internet at all than to connect directly without Tor**. No silent fallback to the direct network, including during startup, a Tor error or a VPN failure.
 
-### Décision de conception retenue : deux APK, un même projet
+### Chosen design: two APKs, one project
 
-La **voie privilégiée** est de maintenir deux applications Android distinctes, développées dans ce même dépôt, plutôt qu'un seul APK qui héberge X *et* le fournisseur VPN :
+The **preferred approach** is to maintain two separate Android apps, developed in this same repository, rather than a single APK hosting both X *and* the VPN provider:
 
-1. **APK X + Piko (Morphe)** : conserve les patchs X existants, expose les paramètres, l'état et les commandes de la fonctionnalité Tor. L'app X **n'héberge pas le service VPN**.
-2. **APK compagnon « Piko Tor »** : application maintenue par ce projet, autonome, sans Orbot ni fournisseur de VPN/proxy tiers, qui héberge `VpnService`, Arti et le moteur de transfert réseau, avec un identifiant d'application/UID Android distinct de X.
+1. **X + Piko APK (Morphe)**: keeps the existing X patches and exposes the settings, state and controls of the Tor feature. The X app **does not host the VPN service**.
+2. **"Piko Tor" companion APK**: an app maintained by this project, standalone, without Orbot or any third-party VPN/proxy provider, hosting `VpnService`, Arti and the network forwarding engine, with an app identifier/Android UID distinct from X.
 
-Le fait d'avoir deux APK **ne suffit pas** à garantir le blocage : la protection contre la disparition du tunnel doit reposer sur le mode Android **« VPN permanent » + « Bloquer les connexions sans VPN »**, une configuration système que l'utilisateur devra activer et vérifier. Cette configuration peut affecter les autres applications du téléphone/profil.
+Having two APKs **is not enough** to guarantee blocking: protection against the tunnel disappearing must rely on Android's **"Always-on VPN" + "Block connections without VPN"** mode, a system setting the user must enable and verify. This setting may affect other apps on the phone/profile.
 
-**Pourquoi cette séparation :** si X et `VpnService` partagent l'UID du fournisseur VPN dans un même APK, ils ne bénéficient pas de la même barrière de verrouillage système indépendante ; le fournisseur VPN doit pouvoir accéder au réseau sous-jacent pour joindre Tor. La conception à deux UID doit être validée par des tests sur les versions Android cibles.
+**Why this separation:** if X and `VpnService` share the VPN provider's UID in a single APK, they do not get the same independent system lockdown barrier; the VPN provider must be able to reach the underlying network to reach Tor. The two-UID design must be validated by tests on the target Android versions.
 
-L'ancienne idée « Tor + VPN dans le même APK X » reste un sujet d'étude, **pas l'architecture de référence pour le mode strict**. Ne la retenir que si une barrière équivalente contre les fuites lors d'un crash/retrait du VPN est effectivement démontrée.
+The old "Tor + VPN in the same X APK" idea remains a research topic, **not the reference architecture for strict mode**. Only adopt it if an equivalent barrier against leaks during a VPN crash/removal is actually demonstrated.
 
-**Limite de la promesse :** l'objectif « aucune connexion directe quand la protection est active et correctement configurée » doit être démontré sur des appareils réels ; ne jamais promettre le risque zéro sur tous les appareils, notamment si le verrouillage système est désactivé, l'autorisation VPN retirée, l'APK compagnon désinstallé ou le système compromis.
+**Limit of the promise:** the goal "no direct connection while protection is active and correctly configured" must be demonstrated on real devices; never promise zero risk on all devices, especially if system lockdown is disabled, VPN permission is revoked, the companion APK is uninstalled or the system is compromised.
 
-## 2. Fonctionnalités cibles
+## 2. Target features
 
-### 2.1. Piko Tor : application compagnon et moteur Tor/Arti
+### 2.1. Piko Tor: companion app and Tor/Arti engine
 
-- Étudier la création d'un **module/application Android autonome** dans le même dépôt, distinct des extensions de code injectées dans X.
-- Évaluer la faisabilité d'embarquer Arti en Rust dans cette application, les ABI Android nécessaires et l'interface JNI/FFI avec Kotlin/Java.
-- Évaluer **Onionmasq** ou un équivalent auditable pour relier un tunnel TUN Android à Arti ; **ne pas supposer** sa compatibilité ou sa maintenance sans vérification.
-- Démarrer, maintenir, relancer et arrêter proprement les composants, avec gestion des circuits, des erreurs, de la batterie, des restrictions Android et des redémarrages.
-- Utiliser une communication **inter-applications sécurisée** entre X/Piko et Piko Tor (permissions, intents/IPC explicites, authentification adaptée aux signatures réellement utilisées par Morphe). Ne jamais autoriser une commande externe arbitraire à désactiver la protection.
-- Ne pas exiger de root, d'Orbot, d'un VPN commercial ni d'un serveur proxy propriétaire.
-- Vérifier la compatibilité des licences et les exigences de publication des composants Rust/Android.
+- Study creating a **standalone Android module/app** in the same repository, separate from the extension code injected into X.
+- Assess the feasibility of embedding Arti in Rust in this app, the required Android ABIs and the JNI/FFI interface with Kotlin/Java.
+- Assess **Onionmasq** or an auditable equivalent to connect an Android TUN tunnel to Arti; **do not assume** its compatibility or maintenance without checking.
+- Start, maintain, restart and cleanly stop components, handling circuits, errors, battery, Android restrictions and reboots.
+- Use **secure inter-app communication** between X/Piko and Piko Tor (permissions, explicit intents/IPC, authentication suited to the signatures Morphe actually uses). Never allow an arbitrary external command to disable protection.
+- Do not require root, Orbot, a commercial VPN or a proprietary proxy server.
+- Check license compatibility and publishing requirements for the Rust/Android components.
 
-### 2.2. Fail-closed strict et protection contre les fuites d'IP
+### 2.2. Strict fail-closed and IP leak protection
 
-**Invariants de sécurité souhaités :**
+**Desired security invariants:**
 
-1. **Tor opérationnel + VPN actif + verrouillage Android actif** → X peut accéder au réseau **uniquement via Tor** dans le périmètre réseau validé.
-2. **Tor indisponible mais tunnel VPN présent** → les connexions de X sont **bloquées** ; jamais de sortie directe ni de contournement IPv4, IPv6, DNS, UDP ou QUIC.
-3. **Service VPN arrêté, tué, planté ou tunnel détruit** → le verrouillage VPN **géré par Android** doit bloquer les connexions de X jusqu'au rétablissement du VPN.
-4. **Au démarrage / après redémarrage / pendant la reconnexion** → ne pas considérer la protection active ni autoriser X à transmettre tant que les conditions nécessaires ne sont pas réunies. Auditer les requêtes envoyées avant l'initialisation des hooks.
-5. **Autorisation VPN révoquée, VPN permanent désactivé ou application désinstallée** → ne pas prétendre que la barrière système subsiste ; détecter et signaler la perte de protection lorsque c'est possible. Évaluer une garde supplémentaire dans X, sans l'appeler « garantie » si elle ne couvre pas toutes les piles réseau.
-6. **L'utilisateur désactive explicitement la protection** → afficher clairement le risque de connexion directe ; ne jamais désactiver le verrouillage ou basculer en direct implicitement.
+1. **Tor working + VPN active + Android lockdown active** → X can reach the network **only via Tor** within the validated network scope.
+2. **Tor unavailable but VPN tunnel present** → X's connections are **blocked**; never a direct exit or IPv4, IPv6, DNS, UDP or QUIC bypass.
+3. **VPN service stopped, killed, crashed or tunnel destroyed** → the VPN lockdown **managed by Android** must block X's connections until the VPN is restored.
+4. **At startup / after reboot / during reconnection** → do not consider protection active nor allow X to transmit until the required conditions are met. Audit requests sent before the hooks are initialized.
+5. **VPN permission revoked, always-on VPN disabled or app uninstalled** → do not claim the system barrier still holds; detect and report loss of protection when possible. Evaluate an additional guard in X, without calling it a "guarantee" if it does not cover every network stack.
+6. **The user explicitly disables protection** → clearly show the risk of a direct connection; never disable lockdown or switch to direct implicitly.
 
-**Exigences Android :**
+**Android requirements:**
 
-- Étudier `VpnService`, les options système « VPN permanent » / « Bloquer les connexions sans VPN » et leurs différences selon Android/OEM. **Une application grand public ne doit pas présumer pouvoir activer ce verrouillage automatiquement** ; prévoir un guide de configuration utilisateur.
-- Utiliser et tester `VpnService.Builder.addAllowedApplication()` pour cibler précisément le package installé de X lorsque c'est adapté. **Vérifier en mode verrouillage** le sort des autres applications : le VPN par application et le verrouillage Android peuvent les priver d'Internet. Évaluer un profil Android séparé si l'utilisateur veut isoler X du reste du téléphone.
-- Vérifier que X et Piko Tor ont effectivement **des UID différents** ; ne pas utiliser un UID partagé ni supposer un nom de package immuable (clones/renommage).
-- Protéger les sockets sortants nécessaires à Arti contre une boucle VPN, tout en s'assurant qu'**aucun socket de X** n'obtient un bypass direct du système VPN.
-- Transférer les flux TCP via Tor, traiter les DNS sans fuite et **bloquer ou gérer explicitement** les protocoles non compatibles (notamment UDP/QUIC, IPv6) ; jamais de fallback direct.
-- Vérifier les permissions, composants exportés, état du VPN, configuration réseau, reconnexion et gestion des interruptions.
+- Study `VpnService`, the "Always-on VPN" / "Block connections without VPN" system options and how they differ across Android versions/OEMs. **A consumer app must not assume it can enable this lockdown automatically**; provide a user setup guide.
+- Use and test `VpnService.Builder.addAllowedApplication()` to precisely target X's installed package when appropriate. **Check in lockdown mode** what happens to other apps: per-app VPN plus Android lockdown can cut their Internet access. Evaluate a separate Android profile if the user wants to isolate X from the rest of the phone.
+- Check that X and Piko Tor actually have **different UIDs**; do not use a shared UID nor assume an immutable package name (clones/renaming).
+- Protect the outgoing sockets Arti needs against a VPN loop, while making sure **no X socket** gets a direct bypass of the VPN system.
+- Forward TCP flows via Tor, handle DNS without leaks and **block or explicitly handle** incompatible protocols (notably UDP/QUIC, IPv6); never a direct fallback.
+- Check permissions, exported components, VPN state, network configuration, reconnection and interruption handling.
 
-**Distinction fondamentale :** le fail-closed du moteur Tor lorsque le TUN existe ne protège **pas** contre la disparition du TUN. L'objectif strict requiert un verrouillage indépendant fourni par Android et effectivement activé.
+**Fundamental distinction:** the Tor engine failing closed while the TUN exists does **not** protect against the TUN disappearing. The strict goal requires an independent lockdown provided by Android and actually enabled.
 
-**Un SOCKS local n'est pas un VPN complet.** Toute couverture réseau déclarée doit être vérifiée avec des tests négatifs (trafic qui *ne doit pas* sortir).
+**A local SOCKS proxy is not a full VPN.** Any claimed network coverage must be verified with negative tests (traffic that *must not* go out).
 
-### 2.3. Réglages Piko dans X
+### 2.3. Piko settings in X
 
-Ajouter une section telle que **Privacy → Tor Network** en respectant les préférences existantes de Piko.
+Add a section such as **Privacy → Tor Network**, following Piko's existing preferences.
 
-- Afficher la présence/version de l'application compagnon « Piko Tor » et proposer l'installation/la configuration manuelle si elle manque.
-- Guider l'utilisateur pour donner son consentement VPN et activer **VPN permanent** puis **Bloquer les connexions sans VPN** dans Android ; ne pas présenter ces actions système comme automatiquement effectuées.
-- Afficher un état honnête : **non installé**, **VPN/lockdown non configuré**, **connexion Tor en cours**, **protégé**, **Tor indisponible — trafic bloqué**, **protection perdue / erreur**.
-- Permettre de démarrer/redémarrer Tor si le contrôle inter-applications est validé, sans créer de fenêtre de connexion directe.
-- Ne montrer **« protégé »** qu'avec des signaux suffisamment fiables de l'état Tor, du VPN et de la configuration de verrouillage ; autrement indiquer que l'état n'est pas vérifié.
-- Pour toute désactivation volontaire, expliquer le risque pour l'IP publique et exiger une action explicite. **Jamais de désactivation automatique de la protection pour « réparer » la connexion.**
-- Ne pas exposer dans les journaux des jetons X, des adresses sensibles, des clés ou d'autres secrets.
+- Show the presence/version of the "Piko Tor" companion app and offer manual installation/setup if it is missing.
+- Guide the user through granting VPN consent and enabling **Always-on VPN** then **Block connections without VPN** in Android; do not present these system actions as automatically performed.
+- Show an honest state: **not installed**, **VPN/lockdown not configured**, **Tor connecting**, **protected**, **Tor unavailable — traffic blocked**, **protection lost / error**.
+- Allow starting/restarting Tor if inter-app control is validated, without creating a direct-connection window.
+- Only show **"protected"** with sufficiently reliable signals about Tor state, the VPN and the lockdown configuration; otherwise state that the status is unverified.
+- For any voluntary disable, explain the risk to the public IP and require an explicit action. **Never automatically disable protection to "fix" the connection.**
+- Do not expose X tokens, sensitive addresses, keys or other secrets in logs.
 
-### 2.4. Compatibilité et performances
+### 2.4. Compatibility and performance
 
-- Préserver autant que possible le fonctionnement normal de X et des autres patchs Piko.
-- Respecter les cycles de vie Android, les restrictions d'arrière-plan, les services et les permissions.
-- Limiter l'impact sur la batterie, la mémoire et le démarrage.
-- Assurer la compatibilité avec le patching Morphe et le packaging APK/APKM.
-- Tester spécialement : connexion au compte, images, vidéos, messages privés, notifications et protocoles incompatibles avec Tor.
-- Décrire clairement les dégradations ou fonctionnalités impossibles à préserver.
-- Tenir compte du fait qu'Android n'autorise normalement **qu'un VPN actif par profil/utilisateur** et que le verrouillage système peut couper le réseau d'autres applications ; le communiquer explicitement.
-- Prévoir l'installation de **deux APK** et la configuration système par l'utilisateur, même si les sources restent dans un unique dépôt.
+- Preserve X's normal behavior and the other Piko patches as much as possible.
+- Respect Android lifecycles, background restrictions, services and permissions.
+- Limit the impact on battery, memory and startup.
+- Ensure compatibility with Morphe patching and APK/APKM packaging.
+- Specifically test: account login, images, videos, direct messages, notifications and Tor-incompatible protocols.
+- Clearly describe degraded or impossible-to-preserve features.
+- Account for the fact that Android normally allows **only one active VPN per profile/user** and that system lockdown may cut the network for other apps; communicate this explicitly.
+- Plan for installing **two APKs** and system setup by the user, even though the sources stay in a single repository.
 
-## 3. Étudier le dépôt réel avant de modifier le code
+## 3. Study the actual repository before changing code
 
-Ne pas inventer l'architecture du projet ni les chemins présents. Inspecter le code, les versions et les conventions actuelles, notamment, **si ces chemins existent** :
+Do not invent the project's architecture or existing paths. Inspect the current code, versions and conventions, in particular, **if these paths exist**:
 
 - `patches/src/main/kotlin/app/crimera/patches/twitter/`
 - `patches/src/main/kotlin/app/crimera/patches/twitter/misc/extension/ExtensionPatch.kt`
 - `extensions/twitter/src/main/java/app/morphe/extension/twitter/`
 - `extensions/twitter/src/main/java/app/morphe/extension/twitter/settings/Settings.java`
 - `extensions/twitter/src/main/java/app/morphe/extension/twitter/settings/ScreenBuilder.java`
-- Les fichiers Gradle, les manifestes Android et les mécanismes d'injection et de packaging Morphe.
+- Gradle files, Android manifests and Morphe injection and packaging mechanisms.
 
-Déterminer :
+Determine:
 
-- Où déclarer le patch optionnel `TorNetworkPatch`, comment ajouter les réglages à X et intégrer les commandes/états provenant de Piko Tor.
-- Comment créer un **nouvel APK compagnon** sans casser le build ou les patchs Piko existants.
-- Comment signer et installer les deux APK, reconnaître le package réel de X, sécuriser les communications et éviter une dépendance à des signatures partagées non garanties.
-- Comment empaqueter Arti et les éventuelles bibliothèques Rust, par ABI et version Android.
-- Quels réglages système doivent être configurés **manuellement** avant qu'un état « protégé » soit valide.
+- Where to declare the optional `TorNetworkPatch`, how to add settings to X and integrate controls/states coming from Piko Tor.
+- How to create a **new companion APK** without breaking the build or existing Piko patches.
+- How to sign and install both APKs, recognize X's real package, secure communications and avoid depending on shared signatures that are not guaranteed.
+- How to package Arti and any Rust libraries, per ABI and Android version.
+- Which system settings must be configured **manually** before a "protected" state is valid.
 
-## 4. Méthode de travail : quatre étapes
+## 4. Working method: four stages
 
-### Étape 1 — Étude de faisabilité (avant l'implémentation)
+### Stage 1 — Feasibility study (before implementation)
 
-Comparer au minimum :
+Compare at least:
 
-- **A — Un seul APK X/Piko avec Arti + hooks SOCKS** : risques de trafic non intercepté, limites de couverture.
-- **B — Un seul APK X/Piko avec Arti + `VpnService`** : limites dues à l'UID du fournisseur VPN et au verrouillage indépendant.
-- **C — Approche préférée : deux APK distincts** (X + Piko, et Piko Tor avec `VpnService` + Arti) **avec verrouillage système Android obligatoire** pour le mode de protection strict.
+- **A — A single X/Piko APK with Arti + SOCKS hooks**: risk of unintercepted traffic, coverage limits.
+- **B — A single X/Piko APK with Arti + `VpnService`**: limits due to the VPN provider's UID and independent lockdown.
+- **C — Preferred approach: two separate APKs** (X + Piko, and Piko Tor with `VpnService` + Arti) **with mandatory Android system lockdown** for strict protection mode.
 
-Examiner Onionmasq et les composants équivalents, l'isolation par profil Android, le comportement du VPN par application en mode verrouillage, les processus réseau de X et les contraintes Morphe. Produire un tableau de risques et **indiquer tout point non démontré**. Ne pas réintroduire une architecture plus faible sans expliquer pourquoi elle préserverait les mêmes garanties.
+Examine Onionmasq and equivalent components, Android profile isolation, per-app VPN behavior in lockdown mode, X's network processes and Morphe constraints. Produce a risk table and **flag every undemonstrated point**. Do not reintroduce a weaker architecture without explaining why it would preserve the same guarantees.
 
-### Étape 2 — Conception
+### Stage 2 — Design
 
-Définir précisément :
+Define precisely:
 
-- Les deux APK, leurs rôles, signatures/UID, manifestes, services, permissions et protocole IPC.
-- La machine à états des connexions Tor, du tunnel VPN et de l'indicateur de protection ; comportement à chaque transition, crash et retrait d'autorisation.
-- Le démarrage sûr (aucune fenêtre d'accès réseau direct non prévue), le DNS, IPv4/IPv6, TCP, UDP/QUIC, les sockets Arti et le blocage du trafic incompatible.
-- La compilation Rust/Android, le packaging ABI, l'impact batterie/mémoire et les parcours d'installation/configuration système.
-- Une procédure de validation reproductible et des critères objectifs pour dire « trafic de X bloqué » / « trafic de X via Tor ».
+- Both APKs, their roles, signatures/UIDs, manifests, services, permissions and IPC protocol.
+- The state machine for Tor connections, the VPN tunnel and the protection indicator; behavior at each transition, crash and permission revocation.
+- Safe startup (no unplanned direct network access window), DNS, IPv4/IPv6, TCP, UDP/QUIC, Arti sockets and blocking of incompatible traffic.
+- Rust/Android build, ABI packaging, battery/memory impact and installation/system setup flows.
+- A reproducible validation procedure and objective criteria for saying "X traffic blocked" / "X traffic via Tor".
 
-### Étape 3 — Implémentation progressive
+### Stage 3 — Incremental implementation
 
-- Commencer par un premier jalon vérifiable, sans annoncer une protection complète trop tôt.
-- Développer le patch Piko **optionnel** et le compagnon Android **distinct** de façon modulaire.
-- Ne pas réécrire Piko, remplacer Morphe ni modifier Instagram pour la première version.
-- Préférer le **fail-closed par défaut** dès que la protection est demandée. Refuser un fallback direct même en cas de difficultés de connexion ou d'incompatibilité média.
-- Ne pas confondre affichage d'un bouton, connexion d'un proxy, démarrage d'Arti et protection effective.
+- Start with a first verifiable milestone, without announcing full protection too early.
+- Develop the **optional** Piko patch and the **separate** Android companion modularly.
+- Do not rewrite Piko, replace Morphe or modify Instagram for the first version.
+- Prefer **fail-closed by default** as soon as protection is requested. Refuse a direct fallback even in case of connection difficulties or media incompatibility.
+- Do not confuse showing a button, connecting a proxy, starting Arti and effective protection.
 
-### Étape 4 — Validation, y compris scénarios négatifs
+### Stage 4 — Validation, including negative scenarios
 
-Distinguer **tests réellement effectués**, **non exécutés** et **tests nécessitant un appareil Android**. Tester au minimum :
+Distinguish **tests actually performed**, **not executed** and **tests requiring an Android device**. Test at least:
 
-1. Build Piko/Morphe et build de Piko Tor ; installation des deux APK sur les ABI Android supportées.
-2. Identités de package et UID effectivement distinctes, IPC et refus des requêtes non autorisées.
-3. Connexion réelle d'Arti et sortie du trafic de X via Tor (observations réseau indépendantes, sans confondre un port ouvert et un tunnel sûr).
-4. Fuites DNS, IPv4, IPv6, connexions natives, UDP/QUIC, WebView et processus auxiliaires de X.
-5. **Coupure volontaire de Tor avec TUN maintenu** : aucune connexion directe de X.
-6. **Crash/kill du `VpnService` ou disparition du TUN** : avec VPN permanent et verrouillage actif, aucune connexion directe de X.
-7. Redémarrage de l'appareil, démarrage avant Tor, changement Wi-Fi ↔ mobile, mode avion, arrière-plan et restrictions batterie.
-8. Retrait du consentement VPN, désactivation du verrouillage, changement de fournisseur VPN, désinstallation du compagnon : documenter précisément **ce qui n'est plus garanti** et empêcher toute fausse indication « protégé ».
-9. **VPN par application + verrouillage** : vérifier le trafic des autres applications, alerter sur l'impact et examiner le profil Android si nécessaire.
-10. Authentification X, médias, messages privés, notifications et non-régression des autres patchs.
+1. Piko/Morphe build and Piko Tor build; installing both APKs on the supported Android ABIs.
+2. Package identities and UIDs actually distinct, IPC and rejection of unauthorized requests.
+3. Real Arti connection and X traffic exiting via Tor (independent network observations, without confusing an open port with a safe tunnel).
+4. DNS, IPv4, IPv6, native connections, UDP/QUIC, WebView and X auxiliary process leaks.
+5. **Deliberately stopping Tor with the TUN kept up**: no direct connection from X.
+6. **Crash/kill of `VpnService` or TUN disappearance**: with always-on VPN and lockdown active, no direct connection from X.
+7. Device reboot, startup before Tor, Wi-Fi ↔ mobile switching, airplane mode, background and battery restrictions.
+8. VPN consent revoked, lockdown disabled, VPN provider changed, companion uninstalled: document precisely **what is no longer guaranteed** and prevent any false "protected" indication.
+9. **Per-app VPN + lockdown**: check other apps' traffic, warn about the impact and consider an Android profile if needed.
+10. X authentication, media, direct messages, notifications and non-regression of other patches.
 
-Ne jamais inventer un test, une mesure, un état sécurisé ou une absence globale de fuite.
+Never invent a test, a measurement, a secure state or a global absence of leaks.
 
-## 5. Contraintes de sécurité et d'honnêteté technique
+## 5. Security and technical honesty constraints
 
-1. **Fail-closed strict prioritaire.** X ne doit pas récupérer automatiquement Internet sans Tor si Arti ou le VPN ne fonctionne plus. Les limites réelles de cette exigence dépendent de la configuration et du comportement vérifié d'Android.
-2. **Deux APK de référence.** La séparation X / Piko Tor et la présence d'un verrouillage VPN Android activé sont les prérequis du modèle de protection recherché. « Deux APK » sans verrouillage actif **n'est pas suffisant**.
-3. **Aucune fausse garantie.** Ne jamais prétendre pouvoir garantir à 100 % l'absence de fuite d'IP sur tous les appareils ou si l'utilisateur retire/désactive les protections système.
-4. **Pas de bypass silencieux.** Ne jamais contourner Tor pour faire fonctionner X, les notifications, les médias, UDP ou les DNS. Bloquer plutôt que basculer directement.
-5. **Séparer identité de compte et IP.** Même avec Tor, un compte X connecté et les actions de l'utilisateur peuvent permettre à X de reconnaître ce compte. Le fournisseur d'accès voit normalement la connexion au réseau Tor.
-6. **Infrastructure indépendante.** Pas d'Orbot obligatoire, de VPN tiers, de serveur proxy propriétaire ni d'exigence de root. L'APK compagnon Piko Tor est un composant **du projet**, pas un fournisseur externe.
-7. **Sécurité du contrôle.** Ne pas permettre à un intent, composant exporté ou autre app de désactiver le verrouillage / la protection sans autorisation explicite.
-8. **Licences et compatibilité.** Respecter GPLv3 et les licences des composants ; documenter les incompatibilités et contraintes Android ou Morphe.
-9. **Documentation honnête de l'installation.** Indiquer le consentement VPN, le verrouillage système et son impact potentiel sur la connectivité des autres applications. Ne jamais décrire un réglage non effectué comme actif.
+1. **Strict fail-closed comes first.** X must not automatically regain Internet access without Tor if Arti or the VPN stops working. The real limits of this requirement depend on the configuration and verified Android behavior.
+2. **Two APKs as reference.** Separating X / Piko Tor and having Android VPN lockdown enabled are prerequisites of the intended protection model. "Two APKs" without active lockdown **is not enough**.
+3. **No false guarantees.** Never claim to guarantee 100% absence of IP leaks on all devices or if the user removes/disables system protections.
+4. **No silent bypass.** Never bypass Tor to make X, notifications, media, UDP or DNS work. Block rather than switch to direct.
+5. **Separate account identity from IP.** Even with Tor, a logged-in X account and the user's actions may let X recognize that account. The ISP normally sees the connection to the Tor network.
+6. **Independent infrastructure.** No mandatory Orbot, third-party VPN, proprietary proxy server or root requirement. The Piko Tor companion APK is a component **of the project**, not an external provider.
+7. **Control security.** Do not allow an intent, exported component or other app to disable lockdown / protection without explicit authorization.
+8. **Licenses and compatibility.** Respect GPLv3 and component licenses; document incompatibilities and Android or Morphe constraints.
+9. **Honest installation documentation.** State VPN consent, system lockdown and its potential impact on other apps' connectivity. Never describe a setting that has not been applied as active.
 
-## 6. Résultat recherché et comportement attendu des agents
+## 6. Target outcome and expected agent behavior
 
-**Résultat final visé :** Piko ajoute à X une interface Tor et une intégration sécurisée avec une application compagnon **Piko Tor** fournissant `VpnService` et Arti, avec un **fail-closed strict** appuyé sur le verrouillage Android « VPN permanent + Bloquer les connexions sans VPN », puis démontré par des tests.
+**Final target outcome:** Piko adds to X a Tor interface and a secure integration with a **Piko Tor** companion app providing `VpnService` and Arti, with **strict fail-closed** backed by Android's "Always-on VPN + Block connections without VPN" lockdown, then demonstrated by tests.
 
-Lors des futures sessions d'agent :
+In future agent sessions:
 
-- Conserver la **priorité à l'absence de connexion directe** plutôt qu'à la disponibilité de X.
-- Traiter la **séparation de X et du moteur VPN en deux APK** comme architecture de référence, sans considérer qu'elle suffit à elle seule à sécuriser le trafic.
-- Lire le code réel et l'état du dépôt avant les modifications ; conserver le fonctionnement des patchs existants et le périmètre X uniquement.
-- Ne pas présenter ce cahier des charges comme un développement déjà réalisé.
-- Documenter les décisions, les dépendances, les versions, les preuves et les tests dans le dépôt.
-- Commencer par la faisabilité, puis concevoir, implémenter et valider progressivement, en signalant sans ambiguïté les fonctions impossibles ou les risques résiduels.
+- Keep **priority on no direct connection** over X's availability.
+- Treat **separating X and the VPN engine into two APKs** as the reference architecture, without assuming it alone secures traffic.
+- Read the actual code and repository state before making changes; preserve existing patches and keep the scope to X only.
+- Do not present these requirements as development already done.
+- Document decisions, dependencies, versions, evidence and tests in the repository.
+- Start with feasibility, then design, implement and validate incrementally, flagging impossible features or residual risks unambiguously.
 
-### Références techniques pour la phase de faisabilité
+### Technical references for the feasibility phase
 
-- Android — VPN, VPN permanent et blocage des connexions hors VPN : https://developer.android.com/develop/connectivity/vpn
-- Android — VpnService, état du verrouillage et bypass de sockets du moteur VPN : https://developer.android.com/reference/android/net/VpnService
-- Android — VPN par application : https://developer.android.com/reference/android/net/VpnService.Builder
-- Tor Project — Arti : https://gitlab.torproject.org/tpo/core/arti
-- Tor Project — Onionmasq (à examiner, non présumé compatible) : https://gitlab.torproject.org/tpo/core/onionmasq
-
+- Android — VPN, always-on VPN and blocking connections outside the VPN: https://developer.android.com/develop/connectivity/vpn
+- Android — VpnService, lockdown state and VPN engine socket bypass: https://developer.android.com/reference/android/net/VpnService
+- Android — Per-app VPN: https://developer.android.com/reference/android/net/VpnService.Builder
+- Tor Project — Arti: https://gitlab.torproject.org/tpo/core/arti
+- Tor Project — Onionmasq (to be examined, not assumed compatible): https://gitlab.torproject.org/tpo/core/onionmasq
