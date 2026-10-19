@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="piko_title_tor">Confidentialité — Réseau Tor</string>
+    <string name="piko_tor_open">Ouvrir Piko Tor</string>
+    <string name="piko_tor_installed">Compagnon installé : %s</string>
+    <string name="piko_tor_unverified">Protection non vérifiée dans X. Configurez le compagnon séparé et le VPN permanent Android avec blocage hors VPN. Expérimental ; absence de fuites non validée.</string>
+    <string name="piko_tor_missing">Compagnon non installé. Installez Piko Tor séparément ; ce patch seul ne redirige ni ne bloque le trafic.</string>
+    <string name="piko_tor_unsupported">Piko Tor nécessite Android 10 ou plus récent pour vérifier les paramètres de verrouillage réseau.</string>
+    <string name="piko_tor_open_failed">Impossible d’ouvrir Piko Tor. Vérifiez son installation puis ouvrez-le depuis le lanceur Android.</string>
     <!-- Settings Search -->
     <string name="piko_settings_search_hint">Rechercher des paramètres de Piko</string>
     <string name="piko_settings_search_clear">Effacer la saisie</string>

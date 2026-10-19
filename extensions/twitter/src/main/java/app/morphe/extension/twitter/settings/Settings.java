@@ -150,5 +150,7 @@ public class Settings {
     public static final String LOGGING_SECTION = "logging_section";
     public static final String BACKUP_SECTION = "backup_section";
     public static final String NATIVE_SECTION = "native_section";
+    public static final String TOR_SECTION = "tor_section";
+    public static final String TOR_COMPANION = "tor_companion";
     public static final String READER_MODE_KEY = "readerMode";
 }

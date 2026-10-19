@@ -25,6 +25,8 @@ plugins {
     id("app.morphe.patches") version "1.3.3"
 }
 
+include(":companion")
+
 settings {
     extensions {
         defaultNamespace = "app.morphe.extension"
